@@ -1,0 +1,37 @@
+{
+  "name": "ton-sales-lambda-create-product",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "predeploy": "zip -r deploy.zip ./",
+    "deploy": "aws lambda update-function-code --function-name tonSalesCreateProduct --zip-file fileb://deploy.zip",
+    "postdeploy": "rm -rf deploy.zip"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leobritob/ton-sales-lambda-create-product.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leobritob/ton-sales-lambda-create-product/issues"
+  },
+  "homepage": "https://github.com/leobritob/ton-sales-lambda-create-product#readme",
+  "devDependencies": {
+    "eslint": "^7.24.0",
+    "husky": "^6.0.0",
+    "prettier": "^2.2.1",
+    "pretty-quick": "^3.1.0"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.889.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
+}
