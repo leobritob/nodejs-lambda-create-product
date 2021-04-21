@@ -17,11 +17,18 @@ exports.handler = async (event) => {
     }
   }
 
-  const product = await createProduct(body)
+  try {
+    const product = await createProduct(body)
 
-  return {
-    statusCode: 201,
-    body: JSON.stringify({ product }),
+    return {
+      statusCode: 201,
+      body: JSON.stringify({ product }),
+    }
+  } catch (e) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ error: e.message }),
+    }
   }
 }
 
@@ -32,7 +39,7 @@ async function createProduct({ name, price }) {
       Item: {
         _id: { S: uuid() },
         name: { S: name },
-        price: { N: price },
+        price: { N: Number(price) },
       },
     }
 
